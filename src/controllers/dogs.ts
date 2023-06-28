@@ -1,9 +1,10 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { createDog } from '../services/dogs';
 import { Status } from '../types/enums/status';
 import { validationResult } from 'express-validator';
 import { Model } from '../../db/connection';
 import { ApiError } from '../api/error';
+import { errorCatch } from '../helpers/error';
 
 export const createDogs = async (req: Request, res: Response) => {
 	try {
@@ -23,8 +24,11 @@ export const createDogs = async (req: Request, res: Response) => {
 
 		res.status(Status.BadRequest).send(newEntity);
 	} catch (error) {
-		const err = new ApiError(JSON.stringify(error));
-		res.status(Status.BadRequest).json(err);
+		if (error instanceof ApiError) {
+			errorCatch(res, error, Status.BadRequest);
+		} else {
+			console.error('An unexpected error occurred:', error);
+		}
 	}
 };
 
@@ -74,8 +78,11 @@ export const allEntity = async (req: Request, res: Response) => {
 			totalPages: totalPages || 1,
 		});
 	} catch (error) {
-		const err = new ApiError(JSON.stringify(error));
-		res.status(Status.BadRequest).json(err);
+		if (error instanceof ApiError) {
+			errorCatch(res, error, Status.BadRequest);
+		} else {
+			console.error('An unexpected error occurred:', error);
+		}
 	}
 };
 
@@ -90,7 +97,10 @@ export const deleteEntity = async (req: Request, res: Response) => {
 			res.status(Status.Ok).send(deletedEntity);
 		}
 	} catch (error) {
-		const err = new ApiError(JSON.stringify(error));
-		res.status(Status.BadRequest).json(err);
+		if (error instanceof ApiError) {
+			errorCatch(res, error, Status.BadRequest);
+		} else {
+			console.error('An unexpected error occurred:', error);
+		}
 	}
 };

@@ -14,7 +14,7 @@ const port = PORT || 7000;
 app.use(json());
 app.use(cors());
 
-const conection = async () => {
+(async () => {
 	try {
 		if (MG_CONNECTION) {
 			mongoose.connect(MG_CONNECTION);
@@ -31,9 +31,7 @@ const conection = async () => {
 			console.error('An unexpected error occurred:', error);
 		}
 	}
-};
+})();
 
 app.use(Endpoints.Ping, pingRouter);
 app.use(Endpoints.Dogs, dogsRouter);
-
-conection();
