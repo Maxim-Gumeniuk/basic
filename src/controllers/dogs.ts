@@ -68,7 +68,7 @@ export const allEntity = async (req: Request, res: Response) => {
 			dogs = await Model.find();
 		}
 
-		res.json({
+		res.status(Status.Ok).json({
 			data: dogs,
 			currentPage: pageNumber,
 			totalPages: totalPages || 1,
