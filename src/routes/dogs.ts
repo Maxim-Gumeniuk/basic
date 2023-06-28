@@ -6,4 +6,4 @@ import { createDogSchema } from '../validation/create-validation';
 export const dogsRouter = express.Router();
 dogsRouter.get('', allEntity);
 dogsRouter.post(Endpoints.Create, createDogSchema, createDogs);
-dogsRouter.delete('/:id', deleteEntity);
+dogsRouter.delete(Endpoints.Id, deleteEntity);
