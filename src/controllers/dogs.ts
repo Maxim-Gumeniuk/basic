@@ -1,9 +1,8 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { createDog } from '../services/dogs';
 import { Status } from '../types/enums/status';
 import { validationResult } from 'express-validator';
 import { Model } from '../../db/connection';
-import { ApiError } from '../api/error';
 import { errorCatch } from '../helpers/error';
 
 export const createDogs = async (req: Request, res: Response) => {
