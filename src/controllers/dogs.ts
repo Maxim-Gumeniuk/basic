@@ -24,11 +24,7 @@ export const createDogs = async (req: Request, res: Response) => {
 
 		res.status(Status.BadRequest).send(newEntity);
 	} catch (error) {
-		if (error instanceof ApiError) {
-			errorCatch(res, error, Status.BadRequest);
-		} else {
-			console.error('An unexpected error occurred:', error);
-		}
+		errorCatch(res, error, Status.BadRequest);
 	}
 };
 
@@ -78,11 +74,7 @@ export const allEntity = async (req: Request, res: Response) => {
 			totalPages: totalPages || 1,
 		});
 	} catch (error) {
-		if (error instanceof ApiError) {
-			errorCatch(res, error, Status.BadRequest);
-		} else {
-			console.error('An unexpected error occurred:', error);
-		}
+		errorCatch(res, error, Status.BadRequest);
 	}
 };
 
@@ -97,10 +89,6 @@ export const deleteEntity = async (req: Request, res: Response) => {
 			res.status(Status.Ok).send(deletedEntity);
 		}
 	} catch (error) {
-		if (error instanceof ApiError) {
-			errorCatch(res, error, Status.BadRequest);
-		} else {
-			console.error('An unexpected error occurred:', error);
-		}
+		errorCatch(res, error, Status.BadRequest);
 	}
 };
