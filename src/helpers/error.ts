@@ -1,7 +1,7 @@
 import { Response } from 'express';
 import { ApiError } from '../api/error';
 
-export const errorCatch = (res: Response, error: any, status: number) => {
+export const errorCatch = (res: Response, error: unknown, status: number) => {
 	if (error instanceof ApiError) {
 		res.status(status).send(error);
 	} else {
